@@ -33,7 +33,7 @@
 <br>
 <div class="container d-flex justify-content-center h-100">
 
-    <form class="md-form" action="{% url 'upload_csv' %}" method="POST" enctype="multipart/form-data">
+    <form class="md-form" action="{% url 'upload_tsv' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 <div class="custom-file">
   <input type="file" class="custom-file-input" id="customFile">
