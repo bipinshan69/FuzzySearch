@@ -25,6 +25,7 @@ def upload_tsv(request):
     try:
 
         csv_file = request.FILES["tsv_file"]
+
         if not csv_file.name.endswith('.tsv'):
             messages.error(request,'File is not TSV type')
             return HttpResponseRedirect(reverse("upload_tsv"))
@@ -42,6 +43,7 @@ def upload_tsv(request):
         dataf=[]
         for line in lines:
             fields = line.split("\t")
+            print(fields[0])
             if(fields[0]!=''):
                 data_dict = {}
                 data_dict["word"] = fields[0]
