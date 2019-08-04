@@ -9,3 +9,6 @@ from .models import WordBank
 
 def index(request, template_name='index.html'):
     return render(request, template_name)
+
+def configure(request, template_name='configure.html'):
+    return render(request, template_name)
