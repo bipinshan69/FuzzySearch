@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+import logging
+from .models import WordBank
 
-# Create your views here.
+
+def index(request, template_name='index.html'):
+    return render(request, template_name)
