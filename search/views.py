@@ -24,10 +24,10 @@ def upload_tsv(request):
 
     try:
 
-        csv_file = request.FILES["csv_file"]
+        csv_file = request.FILES["tsv_file"]
         if not csv_file.name.endswith('.tsv'):
             messages.error(request,'File is not TSV type')
-            return HttpResponseRedirect(reverse("upload_csv"))
+            return HttpResponseRedirect(reverse("upload_tsv"))
         # if csv_file.multiple_chunks():
         #     print("Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000)))
         #     messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
@@ -61,7 +61,7 @@ def upload_tsv(request):
         logging.getLogger("error_logger").error("Unable to upload file. "+repr(e))
         messages.error(request,"Unable to upload file. "+repr(e))
 
-    return HttpResponseRedirect(reverse("upload_csv"))
+    return HttpResponseRedirect(reverse("upload_tsv"))
 
 
 def autocomplete(request):
