@@ -19,6 +19,8 @@ from search import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name="index"),
-    path('configure/',vir)
+    path('upload_tsv/', views.upload_tsv, name="upload_tsv"),
+    path('autocomplete/', views.autocomplete, name="autocomplete"),
+    path('configure/', views.configure, name="configure"),
 
 ]
