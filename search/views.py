@@ -20,7 +20,7 @@ def upload_tsv(request):
 
     if "GET" == request.method:
 
-        return render(request, "index.html", data)
+        return render(request, "configure.html", data)
 
     try:
 

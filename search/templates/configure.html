@@ -35,10 +35,10 @@
 
     <form class="md-form" action="{% url 'upload_tsv' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-<div class="custom-file">
-  <input type="file" class="custom-file-input" id="tsv_file">
-  <label class="custom-file-label" for="customFile">Choose file</label>
-</div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" name="tsv_file" >
+          <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
         <button type="submit" align="center" class="btn btn-primary text-center" >Upload</button>
     </form>
 </div>
