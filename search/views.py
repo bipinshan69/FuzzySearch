@@ -62,3 +62,18 @@ def upload_tsv(request):
         messages.error(request,"Unable to upload file. "+repr(e))
 
     return HttpResponseRedirect(reverse("upload_csv"))
+
+
+def autocomplete(request):
+    data={}
+    if request.method == "GET":
+
+        search_qs = WordBank.objects.filter(word__startswith=request.GET.get('search', None))[:20]
+        results = []
+        for r in search_qs:
+            results.append(r.word)
+
+        return JsonResponse(results,safe=False)
+
+    data['error']="Not Ajax"
+    return JsonResponse(data)
