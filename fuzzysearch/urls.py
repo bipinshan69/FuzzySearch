@@ -18,5 +18,6 @@ from django.urls import path
 from search import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',vie)
+    path('',views.index,name="index"),
+
 ]
