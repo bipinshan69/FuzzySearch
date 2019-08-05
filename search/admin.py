@@ -1,3 +1,9 @@
+from import_export.admin import ImportExportModelAdmin
 from django.contrib import admin
+from .models import WordBank
+from .resources import WordBankResource
 
-# Register your models here.
+@admin.register(WordBank)
+class WordBankAdmin(ImportExportModelAdmin):
+    resource_class = WordBankResource
+    list_display = ('word','frequency')

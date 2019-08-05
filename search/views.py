@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 import logging
 from .models import WordBank
-
+from tablib import Dataset
+from .resources import WordBankResource
 
 def index(request, template_name='index.html'):
     return render(request, template_name)
@@ -15,7 +16,8 @@ def configure(request, template_name='configure.html'):
 
 
 def upload_tsv(request):
-    data={};
+    data={}
+    dataset = Dataset()
     data['result']="success"
 
     if "GET" == request.method:
@@ -34,24 +36,30 @@ def upload_tsv(request):
         #     messages.error(request,"Uploaded file is too big (%.2f MB)." % (csv_file.size/(1000*1000),))
         #     return HttpResponseRedirect(reverse("upload_csv"))
 
-        file_data = csv_file.read().decode("utf-8")
-
-
-        lines = file_data.split("\n")
+        #file_data = csv_file.read().decode("utf-8")
+        person_resource = WordBankResource()
+        dataset = Dataset()
+        imported_data = dataset.load(csv_file.read().decode("utf-8"))
+        result = person_resource.import_data(imported_data, dry_run=True)  # Test the data import
+        print(result)
+        if not result.has_errors():
+            print('no error')
+            person_resource.import_data(imported_data, dry_run=False)  # Actually import now
+        # lines = file_data.split("\n")
         # print(lines)
         #loop over the lines and save them in db. If error , store as string and then display
-        dataf=[]
-        for line in lines:
-            fields = line.split("\t")
-            print(fields[0])
-            if(fields[0]!=''):
-                data_dict = {}
-                data_dict["word"] = fields[0]
-                data_dict["frequency"] = fields[1]
-            # print(data_dict)
-                dataf.append(WordBank(word=fields[0],frequency=fields[1]))
+        # dataf=[]
+        # for line in lines:
+        #     fields = line.split("\t")
+        #     print(fields[0])
+        #     if(fields[0]!=''):
+        #         data_dict = {}
+        #         data_dict["word"] = fields[0]
+        #         data_dict["frequency"] = fields[1]
+        #     print(data_dict)
+                # dataf.append(WordBank(word=fields[0],frequency=fields[1]))
         # print(dataf)
-        WordBank.objects.bulk_create(dataf)
+        # WordBank.objects.bulk_create(dataf)
             # try:
             #     form = WordBank(word=fields[0],frequency=fields[1])
             #     form.save()
