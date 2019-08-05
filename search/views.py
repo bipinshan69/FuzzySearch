@@ -77,7 +77,6 @@ def upload_tsv(request):
 def autocomplete(request):
     data={}
     if request.method == "GET":
-
         search_qs = WordBank.objects.filter(word__startswith=request.GET.get('search', None))[:20]
         results = []
         for r in search_qs:
