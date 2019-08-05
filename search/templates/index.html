@@ -160,28 +160,63 @@
     </div>
 </body>
  <script>
- function searchOpen() {
-    var search = $('#txtSearch').val()
-    var data = {
-        search: search
-    };
-    $.ajax({
-        url: '/autocomplete/',
-        data: data,
-        type:"GET",
-        success: function(result){
-            searchResult(result);
-        }
-    });
-}
+ <!--function searchOpen() {-->
+    <!--var search = $('#txtSearch').val()-->
+    <!--var data = {-->
+        <!--search: search-->
+    <!--};-->
+    <!--$.ajax({-->
+        <!--url: '/autocomplete/',-->
+        <!--data: data,-->
+        <!--type:"GET",-->
+        <!--success: function(result){-->
+            <!--searchResult(result);-->
+        <!--}-->
+    <!--});-->
+<!--}-->
 
-var X;
-function searchResult(data) {
-    console.log(data)
-    X=data;
-    $( "#txtSearch" ).autocomplete ({
-        source: data,
+<!--var X;-->
+<!--function searchResult(data) {-->
+    <!--console.log(data)-->
+    <!--X=data;-->
+    <!--$( "#txtSearch" ).autocomplete ({-->
+        <!--source: data,-->
+    <!--});-->
+<!--}-->
+
+$(function() {
+    function log(message) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#txtSearch" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: '/autocomplete/',
+          dataType: "jsonp",
+          data: {
+            search: request.term
+          },
+          success: function( data ) {
+            response(data) ;
+          }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+        log( ui.item ?
+          "Selected: " + ui.item.label :
+          "Nothing selected, input was " + this.value);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
     });
-}
+  });
+
 </script>
 </html>
