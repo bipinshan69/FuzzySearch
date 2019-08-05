@@ -188,19 +188,20 @@
 $(document).ready(function(){
 	$("#txtSearch").keyup(function(){
 		$.ajax({
-		type: "GET",
-		url: '/autocomplete/',
+            type: "GET",
+            url: '/autocomplete/',
 
-		data:{search:$(this).val()},
-		beforeSend: function(){
-			<!--$("#txtSearch").css("background","#FFF url(static/img/LoaderIcon.gif) no-repeat 165px");-->
-		},
-		success: function(data){
-			$( "#txtSearch" ).autocomplete ({
-                source: data,
-		    });
-		}
-	});
+            data:{search:$(this).val()},
+            beforeSend: function(){
+                <!--$("#txtSearch").css("background","#FFF url(static/img/LoaderIcon.gif) no-repeat 165px");-->
+            },
+            success: function(data){
+                $( "#txtSearch" ).autocomplete ({
+                    source: data,
+                });
+            }
+	    });
+    });
 });
 function selectWord(val) {
 $("#txtSearch").val(val);
