@@ -160,31 +160,6 @@
     </div>
 </body>
  <script>
- <!--function searchOpen() {-->
-    <!--var search = $('#txtSearch').val()-->
-    <!--var data = {-->
-        <!--search: search-->
-    <!--};-->
-    <!--$.ajax({-->
-        <!--url: '/autocomplete/',-->
-        <!--data: data,-->
-        <!--type:"GET",-->
-        <!--success: function(result){-->
-            <!--searchResult(result);-->
-        <!--}-->
-    <!--});-->
-<!--}-->
-
-
-<!--function searchResult(data) {-->
-    <!--console.log(data)-->
-    <!--$( "#txtSearch" ).autocomplete ({-->
-        <!--source: data,-->
-    <!--});-->
-<!--}-->
-
-
-// AJAX call for autocomplete
 $(document).ready(function(){
 	$("#txtSearch").keyup(function(){
 		$.ajax({
@@ -203,9 +178,5 @@ $(document).ready(function(){
 	    });
     });
 });
-function selectWord(val) {
-$("#txtSearch").val(val);
-$("#suggesstion-box").hide();
-}
 </script>
 </html>
