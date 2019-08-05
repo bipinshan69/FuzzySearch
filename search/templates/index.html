@@ -196,10 +196,9 @@ $(document).ready(function(){
 			<!--$("#txtSearch").css("background","#FFF url(static/img/LoaderIcon.gif) no-repeat 165px");-->
 		},
 		success: function(data){
-			$("#suggesstion-box").show();
-			$("#suggesstion-box").html(data);
-			$("#txtSearch").css("background","#FFF");
-		}
+			$( "#txtSearch" ).autocomplete ({-->
+                source: data,
+		    }
 		});
 	});
 });
