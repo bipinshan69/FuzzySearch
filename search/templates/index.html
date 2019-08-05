@@ -151,7 +151,8 @@
 <div class="container">
       <div class="d-flex justify-content-center h-100">
         <div class="searchbar">
-          <input class="search_input" type="text" name="search" id="txtSearch" onkeyup="searchOpen();" placeholder="Search..." />
+          <input class="search_input" type="text" name="search" id="txtSearch" placeholder="Search..." />
+            <div id="suggesstion-box"></div>
           <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
         </div>
       </div>
@@ -159,27 +160,51 @@
     </div>
 </body>
  <script>
- function searchOpen() {
-    var search = $('#txtSearch').val()
-    var data = {
-        search: search
-    };
-    $.ajax({
-        url: '/autocomplete/',
-        data: data,
-        type:"GET",
-        success: function(result){
-            searchResult(result);
-        }
-    });
-}
+ <!--function searchOpen() {-->
+    <!--var search = $('#txtSearch').val()-->
+    <!--var data = {-->
+        <!--search: search-->
+    <!--};-->
+    <!--$.ajax({-->
+        <!--url: '/autocomplete/',-->
+        <!--data: data,-->
+        <!--type:"GET",-->
+        <!--success: function(result){-->
+            <!--searchResult(result);-->
+        <!--}-->
+    <!--});-->
+<!--}-->
 
 
-function searchResult(data) {
-    console.log(data)
-    $( "#txtSearch" ).autocomplete ({
-        source: data,
-    });
+<!--function searchResult(data) {-->
+    <!--console.log(data)-->
+    <!--$( "#txtSearch" ).autocomplete ({-->
+        <!--source: data,-->
+    <!--});-->
+<!--}-->
+
+
+// AJAX call for autocomplete
+$(document).ready(function(){
+	$("#txtSearch").keyup(function(){
+		$.ajax({
+		type: "POST",
+		url: '/autocomplete/',
+		data:'search='+$(this).val(),
+		beforeSend: function(){
+			$("#txtSearch").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+		},
+		success: function(data){
+			$("#suggesstion-box").show();
+			$("#suggesstion-box").html(data);
+			$("#txtSearch").css("background","#FFF");
+		}
+		});
+	});
+});
+function selectWord(val) {
+$("#txtSearch").val(val);
+$("#suggesstion-box").hide();
 }
 </script>
 </html>
