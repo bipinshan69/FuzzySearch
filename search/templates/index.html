@@ -174,9 +174,10 @@
     });
 }
 
-
+var X;
 function searchResult(data) {
     console.log(data)
+    X=data;
     $( "#txtSearch" ).autocomplete ({
         source: data,
     });
