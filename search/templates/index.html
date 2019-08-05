@@ -188,8 +188,9 @@
 $(document).ready(function(){
 	$("#txtSearch").keyup(function(){
 		$.ajax({
-		type: "POST",
+		type: "GET",
 		url: '/autocomplete/',
+
 		data:{search:$(this).val()},
 		beforeSend: function(){
 			<!--$("#txtSearch").css("background","#FFF url(static/img/LoaderIcon.gif) no-repeat 165px");-->
