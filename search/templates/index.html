@@ -160,20 +160,28 @@
     </div>
 </body>
  <script>
-        $( "#txtSearch" ).autocomplete ({
-                var search = $(this).val();
-                source: $.ajax({
-                        url: '/autocomplete/',
-                        data:  {
-                                search: search
-                        },
-                        type:"GET",
-                        success: function(result){
-                        <!--searchResult(result);-->
-                        console.log(result);
-                        return result;
-                }
-        });
+ function searchOpen() {
+    var search = $('#txtSearch').val()
+    var data = {
+        search: search
+    };
+    $.ajax({
+        url: '/autocomplete/',
+        data: data,
+        type:"GET",
+        success: function(result){
+            searchResult(result);
+        }
+    });
+}
 
+var X;
+function searchResult(data) {
+    console.log(data)
+    X=data;
+    $( "#txtSearch" ).autocomplete ({
+        source: data,
+    });
+}
 </script>
 </html>
