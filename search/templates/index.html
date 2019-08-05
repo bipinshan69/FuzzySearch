@@ -10,7 +10,6 @@
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"/>
     <style>
@@ -95,7 +94,7 @@
     border: 0;
     outline: 0;
     background: none;
-    width: 200px;
+    width: 90%;
     caret-color:transparent;
     line-height: 40px;
     transition: width 0.4s linear;
@@ -152,77 +151,35 @@
 <div class="container">
       <div class="d-flex justify-content-center h-100">
         <div class="searchbar">
-          <div class="ui-widget">
-            <input class="search_input" type="text" name="search" id="txtSearch"  placeholder="Search..." />
-            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-          </div>
+          <input class="search_input" type="text" name="search" id="txtSearch" onkeyup="searchOpen();" placeholder="Search..." />
+          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
         </div>
       </div>
-    </div>
-        <div class="ui-widget" style="margin-top:2em; font-family:Arial">
-        Result:
-        <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
     </div>
     </div>
 </body>
  <script>
- <!--function searchOpen() {-->
-    <!--var search = $('#txtSearch').val()-->
-    <!--var data = {-->
-        <!--search: search-->
-    <!--};-->
-    <!--$.ajax({-->
-        <!--url: '/autocomplete/',-->
-        <!--data: data,-->
-        <!--type:"GET",-->
-        <!--success: function(result){-->
-            <!--searchResult(result);-->
-        <!--}-->
-    <!--});-->
-<!--}-->
-
-<!--var X;-->
-<!--function searchResult(data) {-->
-    <!--console.log(data)-->
-    <!--X=data;-->
-    <!--$( "#txtSearch" ).autocomplete ({-->
-        <!--source: data,-->
-    <!--});-->
-<!--}-->
-
-$(function() {
-    function log(message) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
-
-    $( "#txtSearch" ).autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: '/autocomplete/',
-          dataType: "jsonp",
-          data: {
-            search: $(this).val(),
-          },
-          success: function( data ) {
-            response(data) ;
-          }
-        });
-      },
-      minLength: 3,
-      select: function( event, ui ) {
-        log( ui.item ?
-          "Selected: " + ui.item.label :
-          "Nothing selected, input was " + this.value);
-      },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
+ function searchOpen() {
+    var search = $('#txtSearch').val()
+    var data = {
+        search: search
+    };
+    $.ajax({
+        url: '/autocomplete/',
+        data: data,
+        type:"GET",
+        success: function(result){
+            searchResult(result);
+        }
     });
-  });
+}
 
+
+function searchResult(data) {
+    console.log(data)
+    $( "#txtSearch" ).autocomplete ({
+        source: data,
+    });
+}
 </script>
 </html>
