@@ -202,7 +202,7 @@ $(function() {
           url: '/autocomplete/',
           dataType: "jsonp",
           data: {
-            search: request.term
+            search: $(this).val(),
           },
           success: function( data ) {
             response(data) ;
