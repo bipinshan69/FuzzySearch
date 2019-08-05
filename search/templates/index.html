@@ -192,7 +192,7 @@ $(document).ready(function(){
 		url: '/autocomplete/',
 		data:'search='+$(this).val(),
 		beforeSend: function(){
-			$("#txtSearch").css("background","#FFF url(static/img/LoaderIcon.gif) no-repeat 165px");
+			<!--$("#txtSearch").css("background","#FFF url(static/img/LoaderIcon.gif) no-repeat 165px");-->
 		},
 		success: function(data){
 			$("#suggesstion-box").show();
