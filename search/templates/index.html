@@ -170,17 +170,11 @@
         data: data,
         type:"GET",
         success: function(result){
-            searchResult(result);
+            <!--searchResult(result);-->
+             $( "#txtSearch" ).autocomplete ({
+                source: result,
+             });
         }
-    });
-}
-
-var X;
-function searchResult(data) {
-    console.log(data)
-    X=data;
-    $( "#txtSearch" ).autocomplete ({
-        source: data,
     });
 }
 </script>
