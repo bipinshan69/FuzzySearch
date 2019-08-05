@@ -190,7 +190,7 @@ $(document).ready(function(){
 		$.ajax({
 		type: "POST",
 		url: '/autocomplete/',
-		data:'search='+$(this).val(),
+		data:{search:$(this).val()},
 		beforeSend: function(){
 			<!--$("#txtSearch").css("background","#FFF url(static/img/LoaderIcon.gif) no-repeat 165px");-->
 		},
